@@ -1,0 +1,112 @@
+openapi: 3.0.0
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+        artists:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        coverUri:
+          type: string
+        type:
+          type: string
+          enum:
+            - single
+            - album
+        duration:
+          type: number
+        price:
+          type: number
+        discount:
+          type: number
+        releaseDate:
+          type: string
+          format: date-time
+        genre:
+          type: string
+        lyrics:
+          type: string
+      required:
+        - title
+        - type
+        - artists
+        - price
+    ProductsListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+info:
+  title: product-service
+  description: Product service Serverless API build with AWS API Gateway
+  version: 0.0.1
+paths:
+  /products:
+    get:
+      operationId: getProductsList
+      summary: Get products list
+      description: Get the list of all the service products
+      tags:
+        - Product
+      parameters: []
+      responses:
+        '200':
+          description: Array of product objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsListResponse'
+          headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
+  '/products/{id}':
+    get:
+      operationId: getProductsById
+      summary: Get product by id
+      description: Get product information by its id
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          description: Product id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Product object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
+servers:
+  - url: 'https://oxgr1oja31.execute-api.eu-west-1.amazonaws.com/dev/'
+    description: Development env
