@@ -9,7 +9,7 @@ import ProductService from '../../resources/product/product.service';
 const handler: APIGatewayProxyHandler = async (event) => {
   const { id } = event.pathParameters || {};
   if (!id) {
-    return formatJSONResponse(403, { status: 'BadRequest', message: 'Parameter id is not specified' });
+    return formatJSONResponse(400, { status: 'BadRequest', message: 'Parameter id is not specified' });
   }
 
   const product = await ProductService.findById(id);

@@ -34,7 +34,7 @@ describe('#getProductsById', () => {
     const callback = (err, response) => {
       expect(err).toBeNull();
 
-      expect(response).toHaveProperty('statusCode', 403);
+      expect(response).toHaveProperty('statusCode', 400);
       expect(response).toHaveProperty('body');
       expect(typeof response.body).toBe('string');
 

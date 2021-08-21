@@ -9,7 +9,7 @@ Product service API build with AWS API Gateway and AWS Lambda.
 
 ## Routes
 | Lambda Function | Path | Method | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | getProductsList | [/products](https://oxgr1oja31.execute-api.eu-west-1.amazonaws.com/dev/products) | `GET` | List of products |
 | getProductsById | [/products/:id](https://oxgr1oja31.execute-api.eu-west-1.amazonaws.com/dev/products/1) | `GET` | Product by id |
 
