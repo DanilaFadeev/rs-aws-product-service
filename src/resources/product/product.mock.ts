@@ -8,7 +8,7 @@ export const products: Product[] = [
       "artists": [
           "Сидоджи Дубоshit"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5235336/f4e0aaf4.a.17442733-1/400x400",
+      "coverUri": "https://https://avatars.yandex.net/get-music-content/5235336/f4e0aaf4.a.17442733-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-13T00:00:00+03:00",
       "lyrics": "",
@@ -23,7 +23,7 @@ export const products: Product[] = [
       "artists": [
           "Trippie Redd"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4388221/536f8668.a.17494173-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4388221/536f8668.a.17494173-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -38,7 +38,7 @@ export const products: Product[] = [
       "artists": [
           "$uicideBoy$"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4401814/3d09999c.a.16561636-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4401814/3d09999c.a.16561636-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-13T00:00:00+03:00",
       "lyrics": "",
@@ -55,7 +55,7 @@ export const products: Product[] = [
           "The Limba",
           "Элджей"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5234847/60884c02.a.17528910-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5234847/60884c02.a.17528910-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-19T00:00:00+03:00",
       "lyrics": "",
@@ -71,7 +71,7 @@ export const products: Product[] = [
           "OBLADAET",
           "JEEMBO"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4388221/4c207a27.a.17585959-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4388221/4c207a27.a.17585959-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -88,7 +88,7 @@ export const products: Product[] = [
           "Skrillex",
           "Don Toliver"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4399834/35581025.a.17593581-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4399834/35581025.a.17593581-1/400x400",
       "genre": "dance",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -103,7 +103,7 @@ export const products: Product[] = [
       "artists": [
           "Markul"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5309210/adf56b61.a.17393870-2/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5309210/adf56b61.a.17393870-2/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -119,7 +119,7 @@ export const products: Product[] = [
           "The Limba",
           "Rakhim"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5282321/90ebd930.a.17525259-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5282321/90ebd930.a.17525259-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-18T00:00:00+03:00",
       "lyrics": "",
@@ -134,7 +134,7 @@ export const products: Product[] = [
       "artists": [
           "Machine Gun Kelly"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4446014/f4625e55.a.17357034-2/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4446014/f4625e55.a.17357034-2/400x400",
       "genre": "rock",
       "releaseDate": "2021-08-12T00:00:00+03:00",
       "lyrics": "",
@@ -150,7 +150,7 @@ export const products: Product[] = [
           "Скриптонит",
           "RODIONIS"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4446014/8ad430a8.a.17557622-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4446014/8ad430a8.a.17557622-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-19T00:00:00+03:00",
       "lyrics": "",
@@ -165,7 +165,7 @@ export const products: Product[] = [
       "artists": [
           "БИЛИК"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5280749/89739065.a.17276959-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5280749/89739065.a.17276959-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-18T00:00:00+03:00",
       "lyrics": "",
@@ -180,7 +180,7 @@ export const products: Product[] = [
       "artists": [
           "LOVV66"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4388221/1608143d.a.17554329-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4388221/1608143d.a.17554329-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -195,7 +195,7 @@ export const products: Product[] = [
       "artists": [
           "LILDRUGHILL"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5207413/68c880bc.a.17437704-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5207413/68c880bc.a.17437704-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-12T00:00:00+03:00",
       "lyrics": "",
@@ -211,7 +211,7 @@ export const products: Product[] = [
           "Ty Dolla $ign",
           "dvsn"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4399834/e274b861.a.17566215-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4399834/e274b861.a.17566215-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -228,7 +228,7 @@ export const products: Product[] = [
           "Swae Lee",
           "J.I.D"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5234929/d4535f65.a.17381351-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5234929/d4535f65.a.17381351-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-13T00:00:00+03:00",
       "lyrics": "",
@@ -245,7 +245,7 @@ export const products: Product[] = [
           "Sleepy Hallow",
           "A Boogie Wit da Hoodie"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5282321/5b13921f.a.17367505-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5282321/5b13921f.a.17367505-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-18T00:00:00+03:00",
       "lyrics": "",
@@ -261,7 +261,7 @@ export const products: Product[] = [
           "МАЛЬБЭК",
           "SQWOZ BAB"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5309210/a8c11f33.a.17393591-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5309210/a8c11f33.a.17393591-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -277,7 +277,7 @@ export const products: Product[] = [
           "Ильич да Софья",
           "SLAVA MARLOW"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5236179/e0c43458.a.17439869-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5236179/e0c43458.a.17439869-1/400x400",
       "genre": "ruspop",
       "releaseDate": "2021-08-12T00:00:00+03:00",
       "lyrics": "",
@@ -296,7 +296,7 @@ export const products: Product[] = [
           "Uncle Murda",
           "2.17 Manami Kanzaki"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5282321/20f82fb2.a.17520508-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5282321/20f82fb2.a.17520508-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-16T00:00:00+03:00",
       "lyrics": "",
@@ -312,7 +312,7 @@ export const products: Product[] = [
           "Fendi P",
           "Juicy J"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4399834/826c8cb4.a.17284577-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4399834/826c8cb4.a.17284577-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -327,7 +327,7 @@ export const products: Product[] = [
       "artists": [
           "MATRANG"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5280749/83fb96f4.a.17438606-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5280749/83fb96f4.a.17438606-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-13T00:00:00+03:00",
       "lyrics": "",
@@ -342,7 +342,7 @@ export const products: Product[] = [
       "artists": [
           "Archi"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/5280749/91a22c33.a.17486801-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5280749/91a22c33.a.17486801-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-16T00:00:00+03:00",
       "lyrics": "",
@@ -359,7 +359,7 @@ export const products: Product[] = [
           "Marshmello",
           "James Bay"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4382102/61f3e53f.a.17494227-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4382102/61f3e53f.a.17494227-1/400x400",
       "genre": "pop",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
@@ -374,7 +374,7 @@ export const products: Product[] = [
       "artists": [
           "Jaden"
       ],
-      "coverUri": "avatars.yandex.net/get-music-content/4382102/eaab18c1.a.17494137-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/4382102/eaab18c1.a.17494137-1/400x400",
       "genre": "foreignrap",
       "releaseDate": "2021-08-20T00:00:00+03:00",
       "lyrics": "",
