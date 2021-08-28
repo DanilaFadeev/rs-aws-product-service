@@ -8,7 +8,7 @@ export const products: Product[] = [
       "artists": [
           "Сидоджи Дубоshit"
       ],
-      "coverUri": "https://https://avatars.yandex.net/get-music-content/5235336/f4e0aaf4.a.17442733-1/400x400",
+      "coverUri": "https://avatars.yandex.net/get-music-content/5235336/f4e0aaf4.a.17442733-1/400x400",
       "genre": "rusrap",
       "releaseDate": "2021-08-13T00:00:00+03:00",
       "lyrics": "",

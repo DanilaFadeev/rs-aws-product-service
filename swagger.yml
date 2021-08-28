@@ -42,7 +42,7 @@ components:
         $ref: '#/components/schemas/Product'
 info:
   title: product-service
-  description: Product service Serverless API build with AWS API Gateway
+  description: Product service API build with AWS API Gateway and AWS Lambda
   version: 0.0.1
 paths:
   /products:
