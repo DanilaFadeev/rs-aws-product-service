@@ -25,21 +25,6 @@ export default class DatabaseClient {
     await this.client.end();
   }
 
-  public async transaction(fn: (client: Client) => Promise<void>) {
-    console.log('hey', fn)
-    await this.client.query('BEGIN');
-    try {
-      console.log(1)
-      await fn(this.client);
-      console.log(2)
-      await this.client.query('COMMIT');
-      console.log(3)
-    } catch (error) {
-      await this.client.query('ROLLBACK');
-      throw error;
-    }
-  }
-
   public async execute<T = any>(query: string): Promise<T[]> {
     console.log(query);
     const { rows } = await this.client.query(query);

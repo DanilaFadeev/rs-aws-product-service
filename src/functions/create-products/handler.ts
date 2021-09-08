@@ -17,12 +17,7 @@ const handler: APIGatewayProxyHandler = async (event) => {
 
   const productService = new ProductService(client);
   try {
-    let productId: string;
-    client.transaction(async () => {
-      productId = await productService.create(event.body as any);
-      await productService.createStock(productId);
-    });
-    
+    const productId = await productService.createStockProduct(event.body as any);
     return formatJSONResponse(200, { productId });
   } catch (error) {
     console.log(error);
