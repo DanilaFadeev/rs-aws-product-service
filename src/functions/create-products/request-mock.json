@@ -1,0 +1,19 @@
+{
+  "httpMethod": "POST",
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Cache-Control": "max-age=0"
+  },
+  "body": {
+    "title": "If I Can’t Have Love, I Want Power",
+    "artists": ["The Weekend"],
+    "type": "single",
+    "coverUri": "https://avatars.yandex.net/get-music-content/4399834/1040809d.a.17699730-1/400x400",
+    "genre": "pop",
+    "price": 1.99,
+    "releaseDate": "2021-08-27T00:00:00+03:00"
+  },
+  "isBase64Encoded": false
+}

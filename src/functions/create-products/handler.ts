@@ -6,13 +6,7 @@ import { middyfy } from '@libs/lambda';
 import DatabaseClient from '../../libs/DatabaseClient';
 import ProductService from '../../resources/product/product.service';
 
-
 const handler: APIGatewayProxyHandler = async (event) => {
-  const { id } = event.pathParameters || {};
-  if (!id) {
-    return formatJSONResponse(400, { status: 'BadRequest', message: 'Parameter id is not specified' });
-  }
-
   const client = new DatabaseClient();
   try {
     await client.connect();
@@ -23,17 +17,19 @@ const handler: APIGatewayProxyHandler = async (event) => {
 
   const productService = new ProductService(client);
   try {
-    const product = await productService.findById(id);
-    if (!product) {
-      return formatJSONResponse(404, { status: 'NotFound', message: 'Resource is not found' });
-    }
-    return formatJSONResponse(200, product);
+    let productId: string;
+    client.transaction(async () => {
+      productId = await productService.create(event.body as any);
+      await productService.createStock(productId);
+    });
+    
+    return formatJSONResponse(200, { productId });
   } catch (error) {
     console.log(error);
-    return formatJSONResponse(500, { status: 'InternalServerError', message: 'Failed to get the list of products' });
+    return formatJSONResponse(400, { status: 'BadRequest', message: error.message });
   } finally {
     await client.disconnect();
   }
 }
 
-export const getProductsById = middyfy(handler);
+export const createProducts = middyfy(handler);

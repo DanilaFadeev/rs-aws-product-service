@@ -1,7 +1,7 @@
 {
   "httpMethod": "GET",
   "pathParameters": {
-    "id": "2"
+    "id": "aa7fb8fe-c4c6-4a16-a92f-25a8cba96e1b"
   },
   "headers": {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",

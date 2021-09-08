@@ -26,10 +26,17 @@ const serverlessConfiguration: AWS = {
       shouldStartNameWithService: true
     },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      PG_HOST: '${env:PG_HOST}',
+      PG_PORT: '${env:PG_PORT}',
+      PG_USER: '${env:PG_USER}',
+      PG_PASSWORD: '${env:PG_PASSWORD}',
+      PG_DATABASE: '${env:PG_DATABASE}'
     },
     lambdaHashingVersion: '20201221'
   },
+  // variables from ".env" files will be automatically loaded into the serverless build process
+  useDotenv: true,
   functions
 };
 
