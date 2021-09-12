@@ -73,6 +73,33 @@ paths:
               description: CORS allow credentials header
               schema:
                 type: boolean
+    post:
+      operationId: createProducts
+      summary: Create product
+      description: Create new product resource
+      tags:
+        - Product
+      parameters: []
+      responses:
+        '201':
+          description: Product object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
   '/products/{id}':
     get:
       operationId: getProductsById
