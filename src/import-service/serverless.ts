@@ -31,9 +31,12 @@ const serverlessConfiguration: AWS = {
         Action: [
           's3:GetObject',
           's3:PutObject',
-          's3:*'
+          's3:DeleteObject'
         ],
-        Resource: 'arn:aws:s3:::rs-import-service/uploaded/*'
+        Resource: [
+          'arn:aws:s3:::rs-import-service/uploaded/*',
+          'arn:aws:s3:::rs-import-service/parsed/*'
+        ]
       }
     ]
   },
