@@ -7,6 +7,7 @@
     "openapi:generate": "sls openapi generate -o swagger.yml",
     "invoke:local:product:list": "sls invoke local --function getProductsList",
     "invoke:local:product:get": "sls invoke local --function getProductsById --path src/functions/get-products-by-id/request-mock.json",
+    "invoke:local:product:create": "sls invoke local --function createProducts --path src/functions/create-products/request-mock.json",
     "deploy": "yarn openapi:generate && sls deploy",
     "test": "jest"
   },
@@ -16,6 +17,7 @@
   "dependencies": {
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
+    "pg": "^8.7.1",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "@types/aws-lambda": "^8.10.71",
     "@types/jest": "^27.0.1",
     "@types/node": "^14.14.25",
+    "@types/pg": "^8.6.1",
     "jest": "^27.0.6",
     "json-schema-to-ts": "^1.5.0",
     "serverless": "^2.23.0",

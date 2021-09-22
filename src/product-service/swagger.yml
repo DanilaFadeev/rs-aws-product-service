@@ -42,7 +42,7 @@ components:
         $ref: '#/components/schemas/Product'
 info:
   title: product-service
-  description: Product service Serverless API build with AWS API Gateway
+  description: Product service API build with AWS API Gateway and AWS Lambda
   version: 0.0.1
 paths:
   /products:
@@ -60,6 +60,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductsListResponse'
+          headers:
+            Content-Type:
+              description: Content Type header
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              description: CORS allow origin header
+              schema:
+                type: string
+            Access-Control-Allow-Credentials:
+              description: CORS allow credentials header
+              schema:
+                type: boolean
+    post:
+      operationId: createProducts
+      summary: Create product
+      description: Create new product resource
+      tags:
+        - Product
+      parameters: []
+      responses:
+        '201':
+          description: Product object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
           headers:
             Content-Type:
               description: Content Type header
