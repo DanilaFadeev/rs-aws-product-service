@@ -27,7 +27,7 @@ jest.mock('../../../../../shared/libs/DatabaseClient', () => {
 
 // ProductService mocks
 const ProductServiceMocks = {
-  createStockProduct: jest.fn()
+  createBulkProducts: jest.fn()
 };
 
 jest.mock('../../../../../shared/resources/product/product.service', () => {
@@ -48,7 +48,9 @@ describe('#catalogBatchProcess', () => {
 
   it('Should create 2 products and publish SNS message', async () => {
     // Arrange
-    const event: AWSEvent<Partial<SQSRecord>> = { Records: [{ body: '{ "name": "Product 1" }' }, { body: '{ "name": "Product 2" }' }] };
+    const event: AWSEvent<Partial<SQSRecord>> = {
+      Records: [{ body: '{ "name": "Product 1" }' }, { body: '{ "name": "Product 2" }' }]
+    };
 
     // Act
     await handlerPromise(event, context);
@@ -57,38 +59,62 @@ describe('#catalogBatchProcess', () => {
     expect(DatabaseClientMocks.connect).toHaveBeenCalledTimes(1);
     expect(DatabaseClientMocks.disconnect).toHaveBeenCalledTimes(1);
 
-    expect(ProductServiceMocks.createStockProduct).toHaveBeenCalledTimes(2);
-    expect(ProductServiceMocks.createStockProduct.mock.calls[0][0]).toEqual({ name: 'Product 1' });
-    expect(ProductServiceMocks.createStockProduct.mock.calls[1][0]).toEqual({ name: 'Product 2' });
+    expect(ProductServiceMocks.createBulkProducts).toHaveBeenCalledTimes(1);
+    expect(ProductServiceMocks.createBulkProducts.mock.calls[0][0]).toEqual([{ name: 'Product 1' }, { name: 'Product 2' }]);
 
     expect(snsMock.calls()).toHaveLength(1);
     expect(snsMock.calls()[0].firstArg.input).toEqual({
       TopicArn: undefined,
       Subject: 'Import Service - Products import',
-      Message: '<h1>Hello</h1>\\n'
+      Message: 'Products Import Notification\nImport status: Succeeded\nImported products count: 2\n',
+      MessageAttributes: {
+        isFailed: {
+          DataType: 'String',
+          StringValue: 'False'
+        }
+      }
     });
   });
 
-  it('Should skip incorrect products', async () => {
-     // Arrange
-     const event: AWSEvent<Partial<SQSRecord>> = { Records: [{ body: 'NOT_VALID_JSON' }, { body: '{ "name": "Product 3" }' }] };
+  it('Should throw an error if database connection is failed', async () => {
+    // Arrange
+    DatabaseClientMocks.connect.mockRejectedValue(new Error('Access Denied'));
+    const event: AWSEvent<Partial<SQSRecord>> = { Records: [{ body: '{ "name": "Product 1" }' }] };
 
-     // Act
-     await handlerPromise(event, context);
- 
+    // Act
+    await expect(() => handlerPromise(event, context))
+      .rejects
+      .toThrowError(new Error('Database connection failed: Access Denied'));
+          
      // Assert
      expect(DatabaseClientMocks.connect).toHaveBeenCalledTimes(1);
-     expect(DatabaseClientMocks.disconnect).toHaveBeenCalledTimes(1);
- 
-     expect(ProductServiceMocks.createStockProduct).toHaveBeenCalledTimes(1);
-     expect(ProductServiceMocks.createStockProduct.mock.calls[0][0]).toEqual({ name: 'Product 3' });
- 
-     expect(snsMock.calls()).toHaveLength(1);
-     expect(snsMock.calls()[0].firstArg.input).toEqual({
-       TopicArn: undefined,
-       Subject: 'Import Service - Products import',
-       Message: '<h1>Hello</h1>\\n'
-     });
+     expect(ProductServiceMocks.createBulkProducts).toHaveBeenCalledTimes(0);
+  });
+
+  it('Should handle an error if products insert failed', async () => {
+    // Arrange
+    ProductServiceMocks.createBulkProducts.mockRejectedValue(new Error('Some field is missing'));
+    const event: AWSEvent<Partial<SQSRecord>> = { Records: [{ body: '{ "name": "Product 1" }' }] };
+
+    // Act
+    await handlerPromise(event, context);
+
+    // Assert
+    expect(DatabaseClientMocks.connect).toHaveBeenCalledTimes(1);
+    expect(DatabaseClientMocks.disconnect).toHaveBeenCalledTimes(1);
+
+    expect(snsMock.calls()).toHaveLength(1);
+    expect(snsMock.calls()[0].firstArg.input).toEqual({
+      TopicArn: undefined,
+      Subject: 'Import Service - Products import',
+      Message: 'Products Import Notification\nImport status: Failed\nError: Some field is missing\n',
+      MessageAttributes: {
+        isFailed: {
+          DataType: 'String',
+          StringValue: 'True'
+        }
+      }
+    });
   });
 
 });

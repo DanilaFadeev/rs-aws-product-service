@@ -9,7 +9,7 @@ const schema = {
       items: { type: 'string' },
       minItems: 1
     },
-    coverUri: { type: 'string' },
+    coveruri: { type: 'string' },
     type: {
       type: 'string',
       enum: ['single', 'album']
@@ -23,7 +23,7 @@ const schema = {
     discount: {
       type: 'number'
     },
-    releaseDate: {
+    releasedate: {
       type: 'string',
       format: 'date-time'
     },

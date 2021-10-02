@@ -23,11 +23,17 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+
       PG_HOST: '${env:PG_HOST}',
       PG_PORT: '${env:PG_PORT}',
       PG_USER: '${env:PG_USER}',
       PG_PASSWORD: '${env:PG_PASSWORD}',
       PG_DATABASE: '${env:PG_DATABASE}',
+
+      S3_IMPORT_SERVICE_BUCKET: 'rs-import-service',
+      SQS_CATALOG_ITEMS_QUEUE: {
+        Ref: 'catalogItemsQueue'
+      },
       SNS_CREATE_PRODUCT_TOPIC: {
         Ref: 'createProductTopic'
       }
@@ -88,7 +94,7 @@ const serverlessConfiguration: AWS = {
           },
           Protocol: 'email',
           Endpoint: 'demidovich.daniil@gmail.com',
-          FilterPolicy: '{ "failedCount": [{ "numeric": ["=", 0] }] }'
+          FilterPolicy: '{ "isFailed": ["False"] }] }'
         }
       },
       createProductSubscriptionFailed: {
@@ -99,7 +105,7 @@ const serverlessConfiguration: AWS = {
           },
           Protocol: 'email',
           Endpoint: 'demidovich.daniil+importfailed@gmail.com',
-          FilterPolicy: '{ "failedCount": [{ "numeric": [">", 0] }] }'
+          FilterPolicy: '{ "isFailed": ["True"] }'
         }
       }
     }

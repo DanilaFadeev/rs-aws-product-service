@@ -1,7 +1,0 @@
-{
-  "private": true,
-  "dependencies": {
-    "csv-parser": "^3.0.0",
-    "pg": "^8.7.1"
-  }
-}
