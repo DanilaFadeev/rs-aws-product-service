@@ -8,13 +8,15 @@
     "invoke:local:product:list": "sls invoke local --function getProductsList",
     "invoke:local:product:get": "sls invoke local --function getProductsById --path src/functions/get-products-by-id/request-mock.json",
     "invoke:local:product:create": "sls invoke local --function createProducts --path src/functions/create-products/request-mock.json",
-    "deploy": "yarn openapi:generate && sls deploy",
+		"deploy:catalogBatchProcess": "sls deploy function -f catalogBatchProcess",
+		"deploy": "yarn openapi:generate && sls deploy",
     "test": "jest"
   },
   "engines": {
     "node": ">=14.15.0"
   },
   "dependencies": {
+    "@aws-sdk/client-sns": "^3.36.0",
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "pg": "^8.7.1",

@@ -23,20 +23,8 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-
-      PG_HOST: '${env:PG_HOST}',
-      PG_PORT: '${env:PG_PORT}',
-      PG_USER: '${env:PG_USER}',
-      PG_PASSWORD: '${env:PG_PASSWORD}',
-      PG_DATABASE: '${env:PG_DATABASE}',
-
       S3_IMPORT_SERVICE_BUCKET: 'rs-import-service',
-      SQS_CATALOG_ITEMS_QUEUE: {
-        Ref: 'catalogItemsQueue'
-      },
-      SNS_CREATE_PRODUCT_TOPIC: {
-        Ref: 'createProductTopic'
-      }
+      SQS_CATALOG_ITEMS_QUEUE: 'https://sqs.eu-west-1.amazonaws.com/734757367619/catalog-items-queue'
     },
     lambdaHashingVersion: '20201221',
     iamRoleStatements: [
@@ -57,58 +45,9 @@ const serverlessConfiguration: AWS = {
         Action: [
           'SQS:SendMessage'
         ],
-        Resource: [
-          { 'Fn::GetAtt': ['catalogItemsQueue', 'Arn'] }
-        ]
-      },
-      {
-        Effect: 'Allow',
-        Action: [
-          'SNS:Publish'
-        ],
-        Resource: [
-          { Ref: 'createProductTopic' }
-        ]
+        Resource: 'arn:aws:sqs:eu-west-1:734757367619:catalog-items-queue'
       }
     ]
-  },
-  resources: {
-    Resources: {
-      catalogItemsQueue: {
-        Type: 'AWS::SQS::Queue',
-        Properties: {
-          QueueName: 'catalog-items-queue'
-        }
-      },
-      createProductTopic: {
-        Type: 'AWS::SNS::Topic',
-        Properties: {
-          TopicName: 'create-product-topic'
-        }
-      },
-      createProductSubscriptionSuccess: {
-        Type: 'AWS::SNS::Subscription',
-        Properties: {
-          TopicArn: {
-            Ref: 'createProductTopic'
-          },
-          Protocol: 'email',
-          Endpoint: 'demidovich.daniil@gmail.com',
-          FilterPolicy: '{ "isFailed": ["False"] }] }'
-        }
-      },
-      createProductSubscriptionFailed: {
-        Type: 'AWS::SNS::Subscription',
-        Properties: {
-          TopicArn: {
-            Ref: 'createProductTopic'
-          },
-          Protocol: 'email',
-          Endpoint: 'demidovich.daniil+importfailed@gmail.com',
-          FilterPolicy: '{ "isFailed": ["True"] }'
-        }
-      }
-    }
   },
   functions
 };

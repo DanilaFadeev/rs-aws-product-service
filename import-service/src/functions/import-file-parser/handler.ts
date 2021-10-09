@@ -3,7 +3,7 @@ import 'source-map-support/register';
 import csv from 'csv-parser';
 import { middyfy } from '@libs/lambda';
 import FileParserService from './service';
-import { AWSEvent, S3Record } from '../../../types';
+import { AWSEvent, S3Record } from '../../../../shared/types';
 
 
 const importFileParser = async (event: AWSEvent<S3Record>) => {
@@ -17,6 +17,7 @@ const importFileParser = async (event: AWSEvent<S3Record>) => {
         .setEncoding('utf8')
         .pipe(csv())
         .on('data', record => {
+					console.log('Record parsed', record);
           const productData = FileParserService.processRecord(record);
           FileParserService.sendSqsMessage(productData);
         })

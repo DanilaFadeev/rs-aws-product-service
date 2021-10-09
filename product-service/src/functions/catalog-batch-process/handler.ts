@@ -2,8 +2,8 @@ import 'source-map-support/register';
 
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns';
 import { middyfy } from '@libs/lambda';
-import { AWSEvent, SQSRecord } from '../../../types';
 
+import { AWSEvent, SQSRecord } from '../../../../shared/types';
 import ProductService from '../../../../shared/resources/product/product.service';
 import DatabaseClient from '../../../../shared/libs/DatabaseClient';
 

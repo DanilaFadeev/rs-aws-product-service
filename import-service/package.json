@@ -7,7 +7,6 @@
     "invoke:local:hello": "sls invoke local --path src/functions/hello/mock.json --function hello",
     "invoke:local:import": "sls invoke local --path src/functions/import-products-file/mock.json --function importProductsFile",
     "deploy:importFileParser": "sls deploy function -f importFileParser",
-    "deploy:catalogBatchProcess": "sls deploy function -f catalogBatchProcess",
     "deploy": "sls deploy",
     "test": "jest"
   },
@@ -16,13 +15,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.31.0",
-    "@aws-sdk/client-sns": "^3.34.0",
     "@aws-sdk/client-sqs": "^3.34.0",
     "@aws-sdk/s3-request-presigner": "^3.31.0",
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "csv-parser": "^3.0.0",
-    "pg": "^8.7.1",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
