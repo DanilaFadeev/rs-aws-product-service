@@ -2,61 +2,31 @@ import 'source-map-support/register';
 
 import csv from 'csv-parser';
 import { middyfy } from '@libs/lambda';
-import {
-  S3Client,
-  GetObjectCommand,
-  CopyObjectCommand,
-  DeleteObjectCommand
-} from '@aws-sdk/client-s3';
+import FileParserService from './service';
+import { AWSEvent, S3Record } from '../../../../shared/types';
 
 
-type S3Event = {
-  eventSource: 'aws:s3' | string;
-  s3: {
-    object: {
-      key: string;
-      size: number;
-    };
-  };q
-};
-
-type Event = { Records: S3Event[] };
-
-const s3Bucket = 'rs-import-service';
-
-const importFileParser = async (event: Event) => {
-  console.log(event);
+const importFileParser = async (event: AWSEvent<S3Record>) => {
   const records = event.Records.filter(record => record.eventSource === 'aws:s3');
 
-  const s3Client = new S3Client({});
-
   for (let i = 0; i < records.length; i++) {
-    const cmd = new GetObjectCommand({ Bucket: s3Bucket, Key: records[0].s3.object.key });
-    const response = await s3Client.send(cmd);
+    const response = await FileParserService.getS3Object(records[0].s3.object.key);
 
-    await new Promise(async (resolve, reject) => {
+    await new Promise<void>(async (resolve, reject) => {
       response.Body
         .setEncoding('utf8')
         .pipe(csv())
-        .on('data', (record) => {
-          console.log(record);
+        .on('data', record => {
+					console.log('Record parsed', record);
+          const productData = FileParserService.processRecord(record);
+          FileParserService.sendSqsMessage(productData);
         })
         .on('end', async () => {
-          const copyObjectCommand = new CopyObjectCommand({
-            Bucket: s3Bucket,
-            CopySource: `${s3Bucket}/${records[0].s3.object.key}`,
-            Key: records[0].s3.object.key.replace('uploaded', 'parsed')
-          });
-          const response = await s3Client.send(copyObjectCommand);
-          console.log(response);
-          const deleteObjectCommand = new DeleteObjectCommand({
-            Bucket: s3Bucket,
-            Key: records[0].s3.object.key
-          });
-          const response22 = await s3Client.send(deleteObjectCommand);
-          console.log(response22);
+          const sourceKey = records[0].s3.object.key;
+          const destKey = sourceKey.replace('uploaded', 'parsed');
 
-          resolve(void 0);
+          await FileParserService.moveS3Object(sourceKey, destKey);
+          resolve();
         })
         .on('err', reject);
     });
