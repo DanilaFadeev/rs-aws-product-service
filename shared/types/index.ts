@@ -26,3 +26,9 @@ export type S3Record = {
 };
 
 export type AWSEvent<T> = { Records: T[]; };
+
+export type AWSTokenAuthorizerEvent = {
+	type: 'TOKEN',
+	methodArn: string,
+	authorizationToken: string
+};
