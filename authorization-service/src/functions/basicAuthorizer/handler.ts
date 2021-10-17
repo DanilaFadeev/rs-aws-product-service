@@ -19,7 +19,7 @@ const basicAuthorizer = async (event: AWSTokenAuthorizerEvent) => {
 		console.error(error.message);
 	}
 
-	const effect = (username && process.env[username] === password) ? 'Allow' : 'Deny';
+	const effect = (username && process.env[username] && process.env[username] === password) ? 'Allow' : 'Deny';
   return generatePolicy('user', effect, event.methodArn);
 }
 
