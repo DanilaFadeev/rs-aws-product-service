@@ -8,6 +8,10 @@ export default {
         method: 'get',
         path: 'import',
         cors: true,
+				authorizer: {
+					arn: 'arn:aws:lambda:eu-west-1:734757367619:function:authorization-service-dev-basicAuthorizer',
+					type: 'token'
+				},
         request: {
           parameters: {
             querystrings: {
@@ -27,4 +31,4 @@ export default {
       }
     }
   ]
-}
+};
