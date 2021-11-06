@@ -1,9 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [],
+  imports: [CacheModule.register({
+		ttl: 60 * 2 // 2 minutes
+	})],
   controllers: [AppController],
   providers: [AppService],
 })

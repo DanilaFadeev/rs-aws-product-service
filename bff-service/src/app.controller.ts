@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, All, Req, Res, HttpException, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 
 import type { Method } from 'axios';
@@ -8,7 +8,7 @@ import type { Request, Response } from 'express';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @All()
   async proxy(@Req() request: Request, @Res() response: Response): Promise<object> {
 		const url = this.appService.getProxyPath(request.url, request.headers.host);
 

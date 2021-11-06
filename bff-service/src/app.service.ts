@@ -1,6 +1,8 @@
 import { URL } from 'url';
+import * as Crypto from 'crypto';
 import axios, { Method, AxiosRequestConfig } from 'axios';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Inject, Logger, CACHE_MANAGER } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 
 interface IProxyResponse {
 	status: number;
@@ -11,6 +13,8 @@ interface IProxyResponse {
 export class AppService {
 
 	private readonly logger = new Logger(AppService.name);
+
+	constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
 	getProxyPath(originalUrl: string, host: string): string {
 		const parsedUrl = new URL(originalUrl, `http://${host}`);
@@ -35,6 +39,14 @@ export class AppService {
 	async sendRequest(url: string, method: Method, data: Record<string, any> = {}): Promise<IProxyResponse> {
 		const response: IProxyResponse = { status: 200, data: {} };
 
+		const requestHash = AppService.getRequestHash(url, method);
+		const cachedResponse = await this.cacheManager.get<IProxyResponse | null>(requestHash);
+
+		if (cachedResponse) {
+			this.logger.log(`The response is found in cache`);
+			return cachedResponse;
+		}
+
 		try {
 			const requestConfig: AxiosRequestConfig = { url, method };
 			if (Object.keys(data).length) {
@@ -44,11 +56,21 @@ export class AppService {
 			const serviceResponse = await axios(requestConfig);
 			response.status = serviceResponse.status;
 			response.data = serviceResponse.data;
+
+			if (url.endsWith('/dev/products/') && method === 'GET') {
+				this.logger.log(`Caching response`);
+				await this.cacheManager.set(requestHash, response);
+			}
 		} catch (error) {
 			response.status = error.response.status;
 			response.data = error.response.data;
 		}
 
 		return response;
+	}
+
+	static getRequestHash(url: string, method: Method): string {
+		const payload = JSON.stringify({ url, method });
+		return Crypto.createHash('sha1').update(payload).digest('base64');
 	}
 }
